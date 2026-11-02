@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+/* PENDENTE: identidade visual (cores, fontes) - aguardando cliente */
+body {
+  background: #fff;
+  color: #1a1a1a;
+  font-family: system-ui, sans-serif;
+}
