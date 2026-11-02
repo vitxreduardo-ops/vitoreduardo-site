@@ -12,6 +12,8 @@ if (!existsSync(OUT)) {
 }
 
 const NOT_FOUND = new Set(["404.html", "404/index.html", "_not-found/index.html"]);
+const urlOf = (rel) => (rel === "index.html" ? "/" : `/${rel.replace(/index\.html$/, "")}`);
+const pendingPages = new Set();
 const read = (p) => readFileSync(join(OUT, p), "utf8");
 const pageFile = (path) => (path === "/" ? "index.html" : `${path.replace(/^\/|\/$/g, "")}/index.html`);
 const hasNoindex = (html) => /<meta[^>]*name="robots"[^>]*content="[^"]*noindex/.test(html);
@@ -35,10 +37,19 @@ for (const file of htmlFiles(OUT)) {
   if (!is404) {
     const h1 = (html.match(/<h1[\s>]/g) || []).length;
     if (h1 !== 1) fail(file, `expected exactly one <h1>, found ${h1}`);
+    const main = html.indexOf("<main");
+    const h1End = html.indexOf("</h1>");
+    if (main >= 0 && h1End > main && html.slice(main, h1End).includes("data-reveal")) {
+      fail(file, "conteúdo acima da dobra (até </h1>) está dentro de data-reveal: invisível sem JS");
+    }
     const canon = html.match(/<link[^>]*rel="canonical"[^>]*>/);
     const href = canon && canon[0].match(/href="([^"]*)"/);
     if (!href) fail(file, 'missing <link rel="canonical">');
     else if (!href[1].endsWith("/")) fail(file, `canonical without trailing slash: ${href[1]}`);
+  }
+  if (html.includes("PENDENTE")) {
+    pendingPages.add(urlOf(rel));
+    if (!hasNoindex(html)) fail(file, "página contém PENDENTE mas não tem robots noindex");
   }
   for (const m of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
     try { JSON.parse(m[1]); } catch (e) { fail(file, `invalid JSON-LD: ${e.message}`); }
@@ -65,20 +76,21 @@ if (existsSync(join(OUT, "sitemap.xml"))) {
   if (!locs.length) fail("out/sitemap.xml", "no <loc> entries");
   for (const loc of locs) {
     if (!loc.startsWith(ORIGIN) || !loc.endsWith("/")) { fail("out/sitemap.xml", `bad <loc> (origin or trailing slash): ${loc}`); continue; }
+    if (pendingPages.has(loc.slice(ORIGIN.length))) fail("out/sitemap.xml", `<loc> é página com PENDENTE: ${loc}`);
     const file = pageFile(loc.slice(ORIGIN.length));
     if (!existsSync(join(OUT, file))) fail("out/sitemap.xml", `<loc> has no built page (out/${file}): ${loc}`);
     else if (hasNoindex(read(file))) fail("out/sitemap.xml", `<loc> points to a noindex page: ${loc}`);
   }
 }
 
-if (existsSync(join(OUT, "portfolio/index.html"))) {
-  const html = read("portfolio/index.html");
-  if (!html.includes("PENDENTE")) fail("out/portfolio/index.html", "expected PENDENTE placeholder text");
-  if (!hasNoindex(html)) fail("out/portfolio/index.html", "placeholder page must have robots noindex");
-}
-
-if (existsSync(join(OUT, "llms.txt")) && /\/(portfolio|sobre)\//.test(read("llms.txt"))) {
-  fail("out/llms.txt", "mentions /portfolio/ or /sobre/ (noindex placeholders)");
+if (existsSync(join(OUT, "llms.txt"))) {
+  for (const m of read("llms.txt").matchAll(/\(?(https:\/\/vitoreduardo\.com\.br(\/[^\s)]*))/g)) {
+    const path = m[2].endsWith("/") ? m[2] : `${m[2]}/`;
+    if (/\.[a-z]+\/?$/.test(m[2]) || path === "/") continue;
+    const file = pageFile(path);
+    if (!existsSync(join(OUT, file))) fail("out/llms.txt", `link para página que não existe no build: ${m[1]}`);
+    else if (hasNoindex(read(file)) || pendingPages.has(path)) fail("out/llms.txt", `link para página noindex/PENDENTE: ${m[1]}`);
+  }
 }
 
 if (existsSync(join(OUT, "robots.txt")) && !read("robots.txt").includes(`Sitemap: ${ORIGIN}/sitemap.xml`)) {

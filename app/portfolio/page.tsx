@@ -3,6 +3,8 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { cases } from "@/content/cases";
+import { pageMetadata } from "@/lib/metadata";
+import { ready } from "@/content/readiness";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { WhatsAppCta } from "@/components/WhatsAppCta";
@@ -12,22 +14,12 @@ const description =
   "Portfólio de Vitor Eduardo - Filmmaker e Marcas: cases de identidade de marca, conteúdo e vídeo em Luís Eduardo Magalhães e região.";
 const path = "/portfolio/";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title,
   description,
-  // PENDENTE: remover noindex quando houver conteúdo real
-  robots: { index: false, follow: true },
-  alternates: { canonical: path },
-  openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    siteName: site.name,
-    url: path,
-    title,
-    description,
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: site.name }],
-  },
-};
+  path,
+  noindex: !ready.portfolio, // PENDENTE: remover noindex quando houver conteúdo real (content/readiness.ts)
+});
 
 export default function PortfolioPage() {
   return (
@@ -39,9 +31,12 @@ export default function PortfolioPage() {
         ])}
       />
       <section className="px-4 py-12">
+        <h1 className="text-3xl font-bold">Portfólio</h1>
+        <p className="mt-4">Em preparação.</p>
+        <div className="mt-8">
+          <WhatsAppCta />
+        </div>
         <Reveal>
-          <h1 className="text-3xl font-bold">Portfólio</h1>
-          <p className="mt-4">Os cases estão sendo preparados e serão publicados aqui em breve.</p>
           <ul className="mt-6 list-disc pl-5">
             {cases.map((c) => (
               <li key={c.slug}>
@@ -49,9 +44,6 @@ export default function PortfolioPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-8">
-            <WhatsAppCta />
-          </div>
         </Reveal>
       </section>
     </>

@@ -4,6 +4,8 @@ export type Case = {
   challenge: string;
   delivery: string;
   media: { src: string; alt: string }[];
+  // true quando o case tem conteúdo real (libera indexação e sitemap)
+  ready?: boolean;
 };
 
 export const cases: Case[] = [

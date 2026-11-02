@@ -1,8 +1,12 @@
-import { site } from "./site";
+import { site, stateNames } from "./site";
 
 export type ServiceInput = { name: string; description: string; url: string };
 
-const areaServed = () => site.cities.map((name) => ({ "@type": "City", name }));
+const areaServed = () => site.cities.map((c) => ({
+    "@type": "City",
+    name: c.name,
+    containedInPlace: { "@type": "State", name: stateNames[c.uf] },
+  }));
 
 export function professionalServiceJsonLd() {
   return {

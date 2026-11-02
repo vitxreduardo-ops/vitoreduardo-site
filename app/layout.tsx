@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
 
 const description =
-  "Filmmaker e estrategista de marcas em Luís Eduardo Magalhães (BA): identidade de marca, estratégia, conteúdo e campanhas em vídeo para negócios da região.";
+  "Vitor Eduardo - Filmmaker e Marcas em Luís Eduardo Magalhães (BA): marca, estratégia, conteúdo e campanhas.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -25,8 +25,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
-    description,
     images: ["/og-default.png"],
   },
 };

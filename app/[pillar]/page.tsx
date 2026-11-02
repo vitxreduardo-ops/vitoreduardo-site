@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { site } from "@/lib/site";
+import { site, citiesSentence } from "@/lib/site";
 import { serviceJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/jsonld";
 import { services, hasRealFaq } from "@/content/services";
+import { pageMetadata } from "@/lib/metadata";
 import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { WhatsAppCta } from "@/components/WhatsAppCta";
@@ -20,22 +21,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar } = await params;
   const p = services.find((s) => s.slug === pillar);
   if (!p) return {};
-  const description = `${p.summary} Atendimento em Luís Eduardo Magalhães e região.`;
-  const path = `/${p.slug}/`;
-  return {
+  return pageMetadata({
     title: p.title,
-    description,
-    alternates: { canonical: path },
-    openGraph: {
-      type: "website",
-      locale: "pt_BR",
-      siteName: site.name,
-      url: path,
-      title: p.title,
-      description,
-      images: [{ url: "/og-default.png", width: 1200, height: 630, alt: site.name }],
-    },
-  };
+    description: `${p.summary} Atendimento em Luís Eduardo Magalhães e região.`,
+    path: `/${p.slug}/`,
+  });
 }
 
 export default async function PillarPage({ params }: Props) {
@@ -60,17 +50,18 @@ export default async function PillarPage({ params }: Props) {
         <JsonLd key={i} data={d} />
       ))}
       <article className="px-4 py-12">
+        <h1 className="text-3xl font-bold">{p.title} em Luís Eduardo Magalhães e região</h1>
+        <p className="mt-4">{p.summary}</p>
+        <div className="mt-8">
+          <WhatsAppCta service={p.title} />
+        </div>
         <Reveal>
-          <h1 className="text-3xl font-bold">{p.title} em Luís Eduardo Magalhães e região</h1>
-          <p className="mt-4">{p.summary}</p>
           <ul className="mt-6 list-disc pl-5">
             {p.items.map((i) => (
-              <li key={i}>
-                <h2 className="text-xl font-semibold">{i}</h2>
-              </li>
+              <li key={i} className="text-xl font-semibold">{i}</li>
             ))}
           </ul>
-          <p className="mt-6">Atendimento em {site.cities.join(", ")}.</p>
+          <p className="mt-6">Atendimento em {citiesSentence}.</p>
           {hasRealFaq(p) && (
             <section className="mt-8" aria-labelledby="faq">
               <h2 id="faq" className="text-2xl font-bold">Perguntas frequentes</h2>
@@ -82,9 +73,6 @@ export default async function PillarPage({ params }: Props) {
               ))}
             </section>
           )}
-          <div className="mt-8">
-            <WhatsAppCta service={p.title} />
-          </div>
           <nav className="mt-10" aria-label="Outros serviços">
             <h2 className="text-xl font-bold">Outros serviços</h2>
             <ul className="mt-3 list-disc pl-5">

@@ -1,31 +1,23 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { personJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { pageMetadata } from "@/lib/metadata";
+import { ready } from "@/content/readiness";
 import { JsonLd } from "@/components/JsonLd";
-import { Reveal } from "@/components/Reveal";
 import { WhatsAppCta } from "@/components/WhatsAppCta";
 
 const title = "Sobre Vitor Eduardo";
 const description =
-  "Conheça Vitor Eduardo, filmmaker e estrategista de marcas em Luís Eduardo Magalhães (BA).";
+  "Sobre Vitor Eduardo - Filmmaker e Marcas, em Luís Eduardo Magalhães (BA).";
 const path = "/sobre/";
 
-export const metadata: Metadata = {
+// PENDENTE: aprovar texto com o Vitor (descrição)
+export const metadata: Metadata = pageMetadata({
   title,
   description,
-  // PENDENTE: remover noindex quando houver conteúdo real
-  robots: { index: false, follow: true },
-  alternates: { canonical: path },
-  openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    siteName: site.name,
-    url: path,
-    title,
-    description,
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: site.name }],
-  },
-};
+  path,
+  noindex: !ready.sobre, // PENDENTE: remover noindex quando houver conteúdo real (content/readiness.ts)
+});
 
 export default function SobrePage() {
   return (
@@ -38,13 +30,11 @@ export default function SobrePage() {
         ])}
       />
       <section className="px-4 py-12">
-        <Reveal>
-          <h1 className="text-3xl font-bold">Sobre Vitor Eduardo</h1>
-          <p className="mt-4">PENDENTE: texto sobre o Vitor</p>
-          <div className="mt-8">
-            <WhatsAppCta />
-          </div>
-        </Reveal>
+        <h1 className="text-3xl font-bold">Sobre Vitor Eduardo</h1>
+        <p className="mt-4">PENDENTE: texto sobre o Vitor</p>
+        <div className="mt-8">
+          <WhatsAppCta />
+        </div>
       </section>
     </>
   );
