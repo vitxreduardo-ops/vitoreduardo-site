@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MotionProvider } from "@/components/MotionProvider";
 
 const description =
   "Filmmaker e estrategista de marcas em Luís Eduardo Magalhães (BA): identidade de marca, estratégia, conteúdo e campanhas em vídeo para negócios da região.";
@@ -34,8 +35,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
       <body>
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        <a
+          href="#conteudo"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+        >
+          Pular para o conteúdo
+        </a>
         <Header />
-        {children}
+        <MotionProvider>
+          <main id="conteudo">{children}</main>
+        </MotionProvider>
         <Footer />
       </body>
     </html>
