@@ -55,3 +55,7 @@ export const services: Pillar[] = [
     ],
   },
 ];
+
+// FAQ só aparece (e só gera FAQPage) quando nenhuma resposta é PENDENTE.
+export const hasRealFaq = (p: Pillar) =>
+  p.faq.length > 0 && p.faq.every((f) => !f.answer.startsWith("PENDENTE"));
