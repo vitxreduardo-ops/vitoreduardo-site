@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { site } from "@/lib/site";
 import { serviceJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/jsonld";
 import { services, hasRealFaq } from "@/content/services";
+import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { WhatsAppCta } from "@/components/WhatsAppCta";
 
@@ -56,7 +57,7 @@ export default async function PillarPage({ params }: Props) {
   return (
     <>
       {jsonLd.map((d, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(d) }} />
+        <JsonLd key={i} data={d} />
       ))}
       <article className="px-4 py-12">
         <Reveal>

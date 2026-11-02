@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { professionalServiceJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { PortfolioTeaser } from "@/components/PortfolioTeaser";
@@ -25,10 +26,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd()) }}
-      />
+      <JsonLd data={professionalServiceJsonLd()} />
       <Hero />
       <ServicesGrid />
       <PortfolioTeaser />

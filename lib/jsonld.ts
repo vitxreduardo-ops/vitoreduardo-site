@@ -57,3 +57,15 @@ export function faqJsonLd(faq: { question: string; answer: string }[]) {
     })),
   };
 }
+
+export function personJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.personName,
+    jobTitle: "Filmmaker e Marcas",
+    url: `${site.url}/sobre/`,
+    sameAs: [site.instagramUrl],
+    worksFor: { "@type": "ProfessionalService", name: site.name, url: site.url },
+  };
+}
