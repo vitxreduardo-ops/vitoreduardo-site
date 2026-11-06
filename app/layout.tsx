@@ -5,10 +5,9 @@ import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
-import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Familjen_Grotesk, JetBrains_Mono } from "next/font/google";
 
-const sans = Inter_Tight({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-sans" });
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif" });
+const sans = Familjen_Grotesk({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-sans" });
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: "400", variable: "--font-mono" });
 
 const description =
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
+    <html lang="pt-BR" className={`${sans.variable} ${mono.variable}`}>
       <body>
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>

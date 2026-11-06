@@ -82,7 +82,9 @@ export default function Home() {
               const card = (
                 <>
                   <div className="cover" style={{ background: tones[i % tones.length] }}>
-                    {c.cover && <img src={c.cover} alt={`${c.title ?? c.client}: capa do projeto`} loading="lazy" />}
+                    {c.cover && (
+                      <img src={c.cover} alt={`${c.title ?? c.client}: capa do projeto`} loading="lazy" style={{ objectPosition: c.coverPosition }} />
+                    )}
                   </div>
                   <div className="meta">
                     <h3>{c.title ?? c.client}</h3>
@@ -141,12 +143,19 @@ export default function Home() {
           <div className="split">
             <h2 id="clientes" className="small">Cases</h2>
             <ul>
-              {showcaseClients.map((c, i) => (
-                <li key={c.name} data-pop={c.image ?? ""} data-tone={tones[i % tones.length]}>
-                  <b>{c.name}</b>
-                  {c.work && <span>{c.work}</span>}
-                </li>
-              ))}
+              {showcaseClients.map((c, i) => {
+                const row = (
+                  <>
+                    <b>{c.name}</b>
+                    {c.work && <span>{c.work}</span>}
+                  </>
+                );
+                return (
+                  <li key={c.name} data-pop={c.image ?? ""} data-tone={tones[i % tones.length]}>
+                    {c.href ? <Link href={c.href}>{row}</Link> : row}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>

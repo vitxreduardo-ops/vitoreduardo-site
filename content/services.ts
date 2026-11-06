@@ -3,7 +3,7 @@ export type Pillar = {
   title: string;
   summary: string;
   items: string[];
-  // foto do popover na home, ex.: /images/servicos/marca.webp (paisagem 4:3)
+  // foto do popover na home, ex.: /images/servicos/marca.webp (paisagem 16:9)
   image?: string;
   faq: { question: string; answer: string }[];
 };
