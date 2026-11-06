@@ -12,13 +12,9 @@ import { showcaseCases, showcaseClients } from "@/lib/showcase";
 
 export const metadata: Metadata = pageMetadata({
   description:
-    "Vitor Eduardo: estratégia e direção criativa para marcas há 10 anos. Marca, conteúdo, campanhas e sites em Luís Eduardo Magalhães (BA) e região.",
+    "Vitor Eduardo, estratégia e direção criativa em Luís Eduardo Magalhães (BA). Marca, filmes, campanhas e sites para empresas do oeste da Bahia.",
   path: "/",
 });
-
-const manifesto =
-  "Empresa boa com marca amadora perde cliente para concorrente pior. Meu trabalho é corrigir isso: decidir o que a sua marca precisa dizer e garantir que cada peça diga a mesma coisa.";
-const accent = "perde cliente para concorrente pior.";
 
 const serviceTitle = Object.fromEntries(services.map((s) => [s.slug, s.title]));
 // tons neutros para capas ainda sem imagem
@@ -26,45 +22,26 @@ const tones = ["#2E2B27", "#22201E", "#22302A", "#35312C", "#1E2622"];
 
 const steps = [
   {
-    name: "Diagnóstico",
-    does: "Entendo o negócio, o público e o que está travando. Muitas vezes o problema não é o que parecia.",
-    gets: "Um diagnóstico escrito, com as prioridades em ordem.",
+    name: "Conversa",
+    does: "Uma reunião para entender o negócio, quem compra de você e o que já foi tentado até aqui.",
+    gets: "Uma proposta com escopo e valor.",
   },
   {
     name: "Direção",
-    does: "Defino posicionamento, conceito e o que vale a pena produzir. Nada é feito só porque está na moda.",
-    gets: "Documento de direção e escopo fechado.",
+    does: "Analiso a marca, os concorrentes e os canais. Defino o posicionamento e o plano de produção.",
+    gets: "Um documento de direção para você aprovar.",
   },
   {
     name: "Produção",
-    does: "Marca, filme, peças e site executados sob a mesma direção. Você aprova cada etapa.",
-    gets: "Material final, pronto para usar.",
+    does: "Executo o que foi aprovado, com revisões em cada entrega.",
+    gets: "Os arquivos finais, organizados por canal.",
   },
   {
-    name: "Lançamento",
-    does: "Coloco no ar, acompanho os primeiros resultados e ajusto o que precisar.",
-    gets: "Arquivos organizados e acompanhamento após a entrega.",
+    name: "Entrega",
+    does: "Publico ou passo o material para o seu time, com orientação de uso.",
+    gets: "Suporte depois da entrega.",
   },
 ];
-
-// Palavras em spans para o efeito de leitura; o trecho de destaque fica em verde.
-function Words({ text, highlight }: { text: string; highlight: string }) {
-  const start = text.indexOf(highlight);
-  let pos = 0;
-  return (
-    <>
-      {text.split(" ").map((w, i) => {
-        const inAcc = pos >= start && pos < start + highlight.length;
-        pos += w.length + 1;
-        return (
-          <span key={i} className={inAcc ? "w acc" : "w"}>
-            {w}{" "}
-          </span>
-        );
-      })}
-    </>
-  );
-}
 
 export default function Home() {
   return (
@@ -74,26 +51,16 @@ export default function Home() {
 
       <section className="section" aria-labelledby="sobre">
         <div className="split">
-          <h2 id="sobre" className="small">Por que isso importa</h2>
-          <p className="big-text reveal-words">
-            <Words text={manifesto} highlight={accent} />
-          </p>
-        </div>
-        <div className="split">
-          <span />
-          <div className="facts">
-            <div>
-              <b>10 anos</b>
-              <p>construindo marcas, campanhas e conteúdo para empresas de vários setores.</p>
-            </div>
-            <div>
-              <b>1 direção</b>
-              <p>do diagnóstico à entrega. Você fala direto com quem decide, sem repasse.</p>
-            </div>
-            <div>
-              <b>Oeste da Bahia</b>
-              <p>base em Luís Eduardo Magalhães, com projetos atendidos também à distância.</p>
-            </div>
+          <h2 id="sobre" className="small">Sobre</h2>
+          <div className="about">
+            <p className="big-text">
+              Trabalho com marcas há 10 anos. Comecei pelo audiovisual e percebi cedo que a maioria dos problemas dos
+              clientes não se resolvia com um vídeo melhor.
+            </p>
+            <p className="about-more">
+              Resolvia com clareza sobre o que dizer e para quem. Por isso todo projeto começa por essa conversa, e só
+              depois decidimos o que produzir.
+            </p>
           </div>
         </div>
       </section>
@@ -109,15 +76,12 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="strip" data-strip>
+          <div className="strip">
             {showcaseCases.map((c, i) => {
               const card = (
                 <>
-                  <div className="vf">
-                    <i className="c" /><i className="c" /><i className="c" /><i className="c" />
-                    <div className="cover" style={{ background: tones[i % tones.length] }}>
-                      {c.cover && <img src={c.cover} alt={`${c.title ?? c.client}: capa do projeto`} loading="lazy" />}
-                    </div>
+                  <div className="cover" style={{ background: tones[i % tones.length] }}>
+                    {c.cover && <img src={c.cover} alt={`${c.title ?? c.client}: capa do projeto`} loading="lazy" />}
                   </div>
                   <div className="meta">
                     <h3>{c.title ?? c.client}</h3>
@@ -136,34 +100,18 @@ export default function Home() {
               );
             })}
           </div>
-          <div className="strip-nav">
-            <span className="tc" data-count>01 / {String(showcaseCases.length).padStart(2, "0")}</span>
-            <span className="ruler2" />
-            <span className="small">arraste</span>
-          </div>
         </section>
       )}
 
       <section className="section" id="servicos" aria-labelledby="servicos-titulo">
         <div className="head">
-          <h2 id="servicos-titulo">O que eu resolvo</h2>
-          <span>{String(services.length).padStart(2, "0")} frentes</span>
+          <h2 id="servicos-titulo">Serviços</h2>
         </div>
-        <p className="intro-line">
-          Tudo parte da estratégia. Cada frente abaixo executa a mesma direção, não é um serviço avulso.
-        </p>
-        {services.map((s, i) => (
+        {services.map((s) => (
           <Link key={s.slug} href={`/${s.slug}/`} className="svc">
-            <span className="num">{String(i + 1).padStart(2, "0")}</span>
             <h3>{s.title}</h3>
             <p>{s.summary}</p>
             <span className="arrow" aria-hidden="true">→</span>
-            <span className="svc-pop" aria-hidden="true">
-              <span className="small">Inclui</span>
-              {s.items.map((it) => (
-                <span key={it} className="pop-item">{it}</span>
-              ))}
-            </span>
           </Link>
         ))}
       </section>
@@ -171,13 +119,11 @@ export default function Home() {
       <section className="section" id="processo" aria-labelledby="processo-titulo">
         <div className="head">
           <h2 id="processo-titulo">Como trabalho</h2>
-          <span>{String(steps.length).padStart(2, "0")} etapas</span>
         </div>
-        <p className="intro-line">Projeto bom começa antes de qualquer câmera ligar ou arquivo abrir.</p>
         {steps.map((s, i) => (
           <div key={s.name} className="step">
             <h3>
-              <small>{String(i + 1).padStart(2, "0")}</small>
+              <small>{i + 1}</small>
               {s.name}
             </h3>
             <p>{s.does}</p>
@@ -192,7 +138,7 @@ export default function Home() {
       {showcaseClients.length > 0 && (
         <section className="section clients" aria-labelledby="clientes">
           <div className="split">
-            <h2 id="clientes" className="small">Marcas que confiaram no processo</h2>
+            <h2 id="clientes" className="small">Clientes</h2>
             <ul>
               {showcaseClients.map((c) => (
                 <li key={c.name}>
@@ -206,10 +152,10 @@ export default function Home() {
       )}
 
       <section className="contact" aria-labelledby="contato">
-        <h2 id="contato">Vamos conversar sobre a sua marca?</h2>
+        <h2 id="contato">Me chama no WhatsApp.</h2>
         <p>
-          Me conta em uma mensagem o que você precisa. Eu respondo pessoalmente. Atendo em {citiesSentence}, e
-          projetos à distância.
+          Conta em poucas linhas o que a empresa faz e o que você precisa. Atendo em {citiesSentence}, e também à
+          distância.
         </p>
         <WhatsAppCta />
       </section>

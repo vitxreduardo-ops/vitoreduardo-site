@@ -21,7 +21,6 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <span className="tc" data-tc aria-hidden="true">00:00:00:00</span>
       </header>
       <a className="btn site-header-cta" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
         Fale comigo

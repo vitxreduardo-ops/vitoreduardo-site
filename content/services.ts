@@ -8,13 +8,13 @@ export type Pillar = {
 
 const PENDENTE = "PENDENTE: resposta a definir pelo Vitor";
 
-// Ordem importa: tudo parte da estratégia; o resto executa a mesma direção.
+// Ordem importa: estratégia primeiro.
 export const services: Pillar[] = [
   {
     slug: "estrategia",
     title: "Estratégia",
     summary:
-      "Para quem divulga, mas não sabe se está falando com as pessoas certas. Defino público, posicionamento e mensagem antes de qualquer peça ser produzida.",
+      "Posicionamento, público e mensagem. É a primeira etapa de quase todo projeto e também pode ser contratada sozinha.",
     items: ["Posicionamento", "Estratégia de marketing"],
     faq: [
       { question: "O que é uma estratégia de marketing?", answer: PENDENTE },
@@ -25,7 +25,7 @@ export const services: Pillar[] = [
     slug: "marca",
     title: "Marca",
     summary:
-      "Para empresas que cresceram e a marca ficou para trás. Identidade visual e regras de uso que fazem o negócio parecer do tamanho que ele realmente é.",
+      "Identidade visual e manual de uso, para quando a empresa cresceu e a marca ainda tem cara de começo.",
     items: ["Construção de marca", "Identidade visual", "Manual de marca"],
     faq: [
       { question: "O que é um manual de marca?", answer: PENDENTE },
@@ -37,7 +37,7 @@ export const services: Pillar[] = [
     slug: "conteudo",
     title: "Conteúdo",
     summary:
-      "Filme, design e motion produzidos com direção, não no improviso. Material que sustenta a marca por meses, não só por um post.",
+      "Filmes, peças gráficas e motion para redes, site e campanhas, produzidos com roteiro e planejados em lotes.",
     items: ["Produção audiovisual", "Design", "Motion design"],
     faq: [
       { question: "Que tipos de vídeo vocês produzem?", answer: PENDENTE },
@@ -48,7 +48,7 @@ export const services: Pillar[] = [
     slug: "campanhas",
     title: "Campanhas",
     summary:
-      "Lançamentos, datas e promoções com uma ideia central, roteiro e peças para cada canal. Pensadas para gerar resultado, não só alcance.",
+      "Lançamentos e datas importantes, com uma ideia central adaptada para cada canal onde ela vai rodar.",
     items: ["Campanhas publicitárias", "Campanhas para redes sociais"],
     faq: [
       { question: "Como funciona uma campanha publicitária?", answer: PENDENTE },
@@ -59,7 +59,7 @@ export const services: Pillar[] = [
     slug: "sites",
     title: "Sites e sistemas",
     summary:
-      "Site rápido, bem posicionado no Google e com a cara da marca. Quando o negócio pede, sistemas sob medida: agendamento, catálogo e automações.",
+      "Sites institucionais e páginas de venda feitos para carregar rápido e aparecer no Google. Também desenvolvo sistemas simples, como agendamento e catálogo.",
     items: ["Sites institucionais", "Páginas de venda", "Sistemas sob medida"],
     faq: [],
   },

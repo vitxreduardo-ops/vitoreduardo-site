@@ -20,7 +20,7 @@ export function Footer() {
       <div className="logo foot-logo" aria-hidden="true" />
       <div className="endbar">
         <span className="small">© {new Date().getFullYear()} Vitor Eduardo</span>
-        <span className="small">10 anos de estratégia e direção criativa</span>
+        <a className="small" href="#conteudo">Voltar ao topo</a>
       </div>
     </footer>
   );

@@ -15,25 +15,16 @@ export function Hero() {
         alt="Vitor Eduardo sorrindo, sentado em estúdio, foto em preto e branco"
       />
       <div className="hero-body">
-        <div>
-          <span className="small">Estratégia e direção criativa · 10 anos de mercado</span>
-          <h1>
-            Sua empresa é boa. <span>A marca precisa mostrar isso.</span>
-          </h1>
-          <p className="lead">
-            Há 10 anos ajudo empresas a se posicionar e a parecer do tamanho que realmente têm. Começo pela
-            estratégia e acompanho até a última peça no ar.
-          </p>
-          <div className="actions">
-            <WhatsAppCta />
-            <a className="btn-ghost" href="#processo">Ver como trabalho</a>
-          </div>
+        <span className="small">Vitor Eduardo · Luís Eduardo Magalhães, BA</span>
+        <h1>Estratégia e direção criativa para marcas do oeste da Bahia.</h1>
+        <p className="lead">
+          Trabalho com empresas que já vendem bem e querem uma marca à altura. Cuido do posicionamento e dirijo a
+          produção das peças: identidade, filmes, campanhas e site.
+        </p>
+        <div className="actions">
+          <WhatsAppCta />
+          <a className="btn-ghost" href="#processo">Como trabalho</a>
         </div>
-        <span className="small" style={{ textAlign: "right" }}>
-          Luís Eduardo Magalhães, BA
-          <br />
-          e projetos remotos
-        </span>
       </div>
     </section>
   );
