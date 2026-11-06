@@ -5,11 +5,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Animações de entrada da home. Sem JS tudo aparece normal (o GSAP só esconde ao rodar).
-// Com "Reduzir movimento" ligado no sistema, só há fade, sem deslocamento nem parallax.
+// Decisão do Vitor: as animações rodam sempre, mesmo com "Reduzir movimento" ligado no sistema.
 export function GsapFx() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const mm = gsap.matchMedia();
 
     // filtro dos trabalhos
     const filters = document.querySelector<HTMLElement>(".filters");
@@ -23,18 +22,14 @@ export function GsapFx() {
     };
     filters?.addEventListener("click", onFilter);
 
-    mm.add(
-      { full: "(prefers-reduced-motion: no-preference)", reduced: "(prefers-reduced-motion: reduce)" },
-      (ctx) => {
-        const full = Boolean(ctx.conditions?.full);
-        const dist = full ? 40 : 0;
+    const refresh = () => ScrollTrigger.refresh();
+    const ctx = gsap.context(() => {
+        const dist = 40;
 
         // hero
         gsap.from(".hero-body > *", { y: dist, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: 0.15 });
-        if (full) {
-          gsap.from(".hero-img", { scale: 1.08, duration: 1.6, ease: "power3.out" });
-          gsap.to(".hero-img", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-        }
+        gsap.from(".hero-img", { scale: 1.08, duration: 1.6, ease: "power3.out" });
+        gsap.to(".hero-img", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
         // blocos que entram juntos ao chegar na tela
         gsap.utils.toArray<HTMLElement>(".head, .about > *, .contact > *, .foot-logo").forEach((el) => {
@@ -52,22 +47,18 @@ export function GsapFx() {
         }
 
         // capas dos trabalhos com parallax leve dentro do card
-        if (full) {
-          gsap.utils.toArray<HTMLElement>(".cover img").forEach((img) => {
-            gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: true } });
-          });
-        }
+        gsap.utils.toArray<HTMLElement>(".cover img").forEach((img) => {
+          gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: img, start: "top bottom", end: "bottom top", scrub: true } });
+        });
 
-        // fontes e imagens mudam alturas depois do carregamento: recalcula os gatilhos
-        const refresh = () => ScrollTrigger.refresh();
-        addEventListener("load", refresh);
-        document.fonts?.ready.then(refresh);
-        return () => removeEventListener("load", refresh);
-      },
-    );
+    });
+    // fontes e imagens mudam alturas depois do carregamento: recalcula os gatilhos
+    addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh);
 
     return () => {
-      mm.revert();
+      ctx.revert();
+      removeEventListener("load", refresh);
       filters?.removeEventListener("click", onFilter);
     };
   }, []);

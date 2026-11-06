@@ -150,7 +150,3 @@ main:has(> .hero) { padding-top: 0; }
   .card:nth-child(even) { margin-top: 0; }
   .head { flex-direction: column; gap: 14px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
-  html { scroll-behavior: auto; }
-}

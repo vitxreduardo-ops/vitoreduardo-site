@@ -54,11 +54,12 @@ export default function Home() {
           <h2 id="sobre" className="small">Sobre</h2>
           <div className="about">
             <p className="big-text">
-              Trabalho com marcas há 10 anos. Comecei pelo audiovisual e percebi cedo que a maioria dos problemas dos
-              clientes não se resolvia com um vídeo melhor.
+              Comecei pelo design, passei pelo 3D e pelo motion e acabei mergulhando no audiovisual como um todo. São 10
+              anos trabalhando com marcas.
             </p>
             <p className="about-more">
-              Resolvia com clareza sobre o que dizer e para quem. Por isso todo projeto começa por essa conversa, e só
+              Nesse caminho aprendi que a maioria dos problemas dos clientes não se resolve com uma peça mais bonita.
+              Resolve com clareza sobre o que dizer e para quem. Por isso todo projeto começa por essa conversa, e só
               depois decidimos o que produzir.
             </p>
           </div>
