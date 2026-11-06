@@ -49,7 +49,7 @@ export default async function PillarPage({ params }: Props) {
       {jsonLd.map((d, i) => (
         <JsonLd key={i} data={d} />
       ))}
-      <article className="px-4 py-12">
+      <article className="page">
         <h1 className="text-3xl font-bold">{p.title} em Luís Eduardo Magalhães e região</h1>
         <p className="mt-4">{p.summary}</p>
         <div className="mt-8">

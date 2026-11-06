@@ -22,7 +22,7 @@ export default function AtendimentoPage() {
           { name: "Atendimento", url: `${site.url}${path}` },
         ])}
       />
-      <section className="px-4 py-12">
+      <section className="page">
         <h1 className="text-3xl font-bold">{title}</h1>
         <p className="mt-4">
           {site.name} atende em {citiesSentence}.

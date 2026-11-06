@@ -43,7 +43,7 @@ export default async function CasePage({ params }: Props) {
           { name: c.client, url: `${site.url}/portfolio/${c.slug}/` },
         ])}
       />
-      <article className="px-4 py-12">
+      <article className="page">
         <h1 className="text-3xl font-bold">{c.client}</h1>
         <div className="mt-8">
           <WhatsAppCta />

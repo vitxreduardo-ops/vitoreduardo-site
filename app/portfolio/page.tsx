@@ -30,7 +30,7 @@ export default function PortfolioPage() {
           { name: title, url: `${site.url}${path}` },
         ])}
       />
-      <section className="px-4 py-12">
+      <section className="page">
         <h1 className="text-3xl font-bold">Portfólio</h1>
         <p className="mt-4">Em preparação.</p>
         <div className="mt-8">
