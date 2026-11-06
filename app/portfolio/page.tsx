@@ -11,7 +11,7 @@ import { WhatsAppCta } from "@/components/WhatsAppCta";
 
 const title = "Portfólio";
 const description =
-  "Portfólio de Vitor Eduardo - Filmmaker e Marcas: cases de identidade de marca, conteúdo e vídeo em Luís Eduardo Magalhães e região.";
+  "Portfólio de Vitor Eduardo: cases de identidade de marca, conteúdo e vídeo em Luís Eduardo Magalhães e região.";
 const path = "/portfolio/";
 
 export const metadata: Metadata = pageMetadata({

@@ -67,7 +67,7 @@ export function personJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.personName,
-    jobTitle: "Filmmaker e Marcas",
+    jobTitle: "Estrategista e diretor criativo",
     url: `${site.url}/sobre/`,
     sameAs: [site.instagramUrl],
     worksFor: { "@type": "ProfessionalService", name: site.name, url: site.url },

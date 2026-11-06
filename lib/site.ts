@@ -1,5 +1,5 @@
 export const site = {
-  name: "Vitor Eduardo - Filmmaker e Marcas",
+  name: "Vitor Eduardo - Estratégia e Direção Criativa",
   personName: "Vitor Eduardo",
   url: "https://vitoreduardo.com.br",
   phone: "+55 77 99822-0929",

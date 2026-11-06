@@ -8,7 +8,7 @@ import { WhatsAppCta } from "@/components/WhatsAppCta";
 
 const title = "Sobre Vitor Eduardo";
 const description =
-  "Sobre Vitor Eduardo - Filmmaker e Marcas, em Luís Eduardo Magalhães (BA).";
+  "Sobre Vitor Eduardo: 10 anos de estratégia e direção criativa para marcas, em Luís Eduardo Magalhães (BA).";
 const path = "/sobre/";
 
 // PENDENTE: aprovar texto com o Vitor (descrição)

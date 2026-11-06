@@ -9,7 +9,7 @@ export function WhatsAppCta({ service }: { service?: string }) {
       href={`${site.whatsappUrl}?text=${encodeURIComponent(text)}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block rounded border border-current px-5 py-3"
+      className="btn"
     >
       Falar no WhatsApp
     </a>

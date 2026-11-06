@@ -1,30 +1,31 @@
 import Link from "next/link";
+import { site } from "@/lib/site";
 
 const links = [
-  ["/marca/", "Marca"],
-  ["/estrategia/", "Estratégia"],
-  ["/conteudo/", "Conteúdo"],
-  ["/campanhas/", "Campanhas"],
-  ["/portfolio/", "Portfólio"],
-  ["/sobre/", "Sobre"],
+  ["/#servicos", "Serviços"],
+  ["/#processo", "Como trabalho"],
   ["/atendimento/", "Atendimento"],
 ] as const;
 
 export function Header() {
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
-      <Link href="/" className="font-semibold">
-        Vitor Eduardo
-      </Link>
-      <nav aria-label="Principal">
-        <ul className="flex flex-wrap gap-x-5 gap-y-2">
-          {links.map(([href, label]) => (
-            <li key={href}>
-              <Link href={href}>{label}</Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+    <>
+      <header className="site-header">
+        <Link href="/" className="brand logo" aria-label="Vitor Eduardo, página inicial" />
+        <nav aria-label="Principal">
+          <ul>
+            {links.map(([href, label]) => (
+              <li key={href}>
+                <Link href={href}>{label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <span className="tc" data-tc aria-hidden="true">00:00:00:00</span>
+      </header>
+      <a className="btn site-header-cta" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+        Fale comigo
+      </a>
+    </>
   );
 }

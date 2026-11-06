@@ -5,9 +5,15 @@ import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
+import { ScrollFx } from "@/components/ScrollFx";
+import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+
+const sans = Inter_Tight({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-sans" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-serif" });
+const mono = JetBrains_Mono({ subsets: ["latin"], weight: "400", variable: "--font-mono" });
 
 const description =
-  "Vitor Eduardo - Filmmaker e Marcas em Luís Eduardo Magalhães (BA): marca, estratégia, conteúdo e campanhas.";
+  "Vitor Eduardo: estratégia e direção criativa para marcas há 10 anos. Marca, conteúdo, campanhas e sites em Luís Eduardo Magalhães (BA) e região.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -31,7 +37,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
       <body>
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
@@ -47,6 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main id="conteudo">{children}</main>
         </MotionProvider>
         <Footer />
+        <ScrollFx />
       </body>
     </html>
   );
