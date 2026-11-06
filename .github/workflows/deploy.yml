@@ -1,3 +1,4 @@
+# Build estático do Next e publicação no GitHub Pages a cada push na main.
 name: Deploy to GitHub Pages
 on:
   push:
