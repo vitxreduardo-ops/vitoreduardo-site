@@ -108,8 +108,8 @@ export default function Home() {
         <div className="head">
           <h2 id="servicos-titulo">Serviços</h2>
         </div>
-        {services.map((s) => (
-          <Link key={s.slug} href={`/${s.slug}/`} className="svc">
+        {services.map((s, i) => (
+          <Link key={s.slug} href={`/${s.slug}/`} className="svc" data-pop={s.image ?? ""} data-tone={tones[i % tones.length]}>
             <h3>{s.title}</h3>
             <p>{s.summary}</p>
             <span className="arrow" aria-hidden="true">→</span>
@@ -139,12 +139,12 @@ export default function Home() {
       {showcaseClients.length > 0 && (
         <section className="section clients" aria-labelledby="clientes">
           <div className="split">
-            <h2 id="clientes" className="small">Clientes</h2>
+            <h2 id="clientes" className="small">Cases</h2>
             <ul>
-              {showcaseClients.map((c) => (
-                <li key={c.name}>
+              {showcaseClients.map((c, i) => (
+                <li key={c.name} data-pop={c.image ?? ""} data-tone={tones[i % tones.length]}>
                   <b>{c.name}</b>
-                  <span>{c.work}</span>
+                  {c.work && <span>{c.work}</span>}
                 </li>
               ))}
             </ul>
@@ -160,6 +160,10 @@ export default function Home() {
         </p>
         <WhatsAppCta />
       </section>
+      {/* popover com foto que segue o cursor nas linhas de serviços e cases (desktop) */}
+      <div className="hover-pop" aria-hidden="true">
+        <img alt="" />
+      </div>
       <GsapFx />
     </>
   );

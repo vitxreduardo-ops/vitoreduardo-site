@@ -22,6 +22,43 @@ export function GsapFx() {
     };
     filters?.addEventListener("click", onFilter);
 
+    // popover com foto nas linhas de serviços e cases: segue o cursor com atraso suave
+    const pop = document.querySelector<HTMLElement>(".hover-pop");
+    const popImg = pop?.querySelector("img");
+    const rows = [...document.querySelectorAll<HTMLElement>("[data-pop]")];
+    const popOff: (() => void)[] = [];
+    if (pop && popImg && matchMedia("(hover: hover) and (min-width: 761px)").matches) {
+      gsap.set(pop, { scale: 0.85, rotate: -3 });
+      const x = gsap.quickTo(pop, "x", { duration: 0.5, ease: "power3" });
+      const y = gsap.quickTo(pop, "y", { duration: 0.5, ease: "power3" });
+      const place = (e: MouseEvent) => [e.clientX + 28, e.clientY - pop.offsetHeight / 2] as const;
+      for (const row of rows) {
+        const enter = (e: MouseEvent) => {
+          const src = row.dataset.pop;
+          if (src) popImg.setAttribute("src", src);
+          else popImg.removeAttribute("src");
+          pop.style.setProperty("--pop-tone", row.dataset.tone ?? "");
+          const [px, py] = place(e);
+          gsap.set(pop, { x: px, y: py });
+          gsap.to(pop, { autoAlpha: 1, scale: 1, rotate: 0, duration: 0.35, ease: "back.out(1.6)", overwrite: "auto" });
+        };
+        const move = (e: MouseEvent) => {
+          const [px, py] = place(e);
+          x(px);
+          y(py);
+        };
+        const leave = () => gsap.to(pop, { autoAlpha: 0, scale: 0.85, rotate: -3, duration: 0.25, overwrite: "auto" });
+        row.addEventListener("mouseenter", enter);
+        row.addEventListener("mousemove", move);
+        row.addEventListener("mouseleave", leave);
+        popOff.push(() => {
+          row.removeEventListener("mouseenter", enter);
+          row.removeEventListener("mousemove", move);
+          row.removeEventListener("mouseleave", leave);
+        });
+      }
+    }
+
     const refresh = () => ScrollTrigger.refresh();
     const ctx = gsap.context(() => {
         const dist = 40;
@@ -60,6 +97,7 @@ export function GsapFx() {
       ctx.revert();
       removeEventListener("load", refresh);
       filters?.removeEventListener("click", onFilter);
+      popOff.forEach((off) => off());
     };
   }, []);
   return null;

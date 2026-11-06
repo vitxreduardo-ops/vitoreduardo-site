@@ -1,4 +1,5 @@
 import type { Case } from "./cases";
+import type { Client } from "./clients";
 
 // Conteúdo de exemplo para ver o layout em `npm run dev`.
 // Nunca entra no build de produção (ver lib/showcase.ts).
@@ -10,7 +11,7 @@ export const demoCases: Case[] = [
   { slug: "demo-5", client: "Cliente Cinco", title: "Sistema de agendamento", year: 2025, services: ["sites"], challenge: "", delivery: "", media: [] },
 ];
 
-export const demoClients = [
+export const demoClients: Client[] = [
   { name: "Cliente Um", work: "Filme" },
   { name: "Cliente Dois", work: "Campanha" },
   { name: "Cliente Três", work: "Marca e site" },

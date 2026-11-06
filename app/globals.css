@@ -124,6 +124,17 @@ section[id] { scroll-margin-top: 72px; }
 .clients li span { font-size: 13px; color: var(--muted); }
 .clients li:hover { color: var(--accent); }
 
+/* popover com foto: um elemento só, posicionado pelo GSAP sobre a linha em hover */
+.hover-pop {
+  position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none;
+  width: 280px; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden;
+  background: var(--pop-tone, #2e2b27);
+  opacity: 0; visibility: hidden;
+}
+.hover-pop img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hover-pop img:not([src]), .hover-pop img[src=""] { display: none; }
+@media (max-width: 760px) { .hover-pop { display: none; } }
+
 /* processo */
 .step { display: grid; grid-template-columns: 1fr 1.4fr 1.4fr; gap: var(--gut); padding: 28px 0; border-top: 1px solid var(--line); align-items: start; }
 .step:last-child { border-bottom: 1px solid var(--line); }
