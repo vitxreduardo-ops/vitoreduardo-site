@@ -7,6 +7,7 @@ import { services } from "@/content/services";
 import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { WhatsAppCta } from "@/components/WhatsAppCta";
+import { CoverLoop } from "@/components/CoverLoop";
 import { GsapFx } from "@/components/GsapFx";
 import { showcaseCases, showcaseClients } from "@/lib/showcase";
 
@@ -85,6 +86,7 @@ export default function Home() {
                     {c.cover && (
                       <img src={c.cover} alt={`${c.title ?? c.client}: capa do projeto`} loading="lazy" style={{ objectPosition: c.coverPosition }} />
                     )}
+                    {c.clip && <CoverLoop src={c.clip} />}
                   </div>
                   <div className="meta">
                     <h3>{c.title ?? c.client}</h3>
